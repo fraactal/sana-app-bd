@@ -1,0 +1,52 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:14
+    env_file:
+      - ./scripts/sana-app.env 
+    #environment:
+    #  POSTGRES_USER: ${POSTGRES_USER}
+    #  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    #  POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./scripts/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    networks:
+      - app-network
+    container_name: postgresql_sana_app
+  #configuracion-inicial:
+  #  build: .
+    #build: ./configuracion-inicial
+    #  context: .
+    #restart: always
+    #ports:
+    #  - "8003:8003"
+    #env_file:
+    #  - .env
+    #depends_on:
+    #  - postgres
+    #networks:
+    #  - app-network
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  postgres_data:
+
+
+#  database-service:
+#    image: "postgres" # use latest official postgres version
+#    env_file:
+#      - ./database_postgresql/database.env # configurando postgres
+#    volumes:
+#      - ./database_postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql # persistir la informacion
+#      - database-data:/var/lib/postgresql/data/
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - app-tier
+#    container_name: postgresql_service
+
