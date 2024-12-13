@@ -5,15 +5,15 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1
         FROM pg_database
-        WHERE datname = 'configuracion_inicial_db'
+        WHERE datname = 'sana_app_db'
     ) THEN
-        CREATE DATABASE configuracion_inicial_db;
+        CREATE DATABASE sana_app_db;
     END IF;
 END
 $$;
 
 -- Usar la base de datos
-\c configuracion_inicial_db;
+\c sana_app_db;
 
 -- Crear tabla roles
 CREATE TABLE IF NOT EXISTS roles (
