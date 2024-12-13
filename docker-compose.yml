@@ -17,36 +17,10 @@ services:
     networks:
       - app-network
     container_name: postgresql_sana_app
-  #configuracion-inicial:
-  #  build: .
-    #build: ./configuracion-inicial
-    #  context: .
-    #restart: always
-    #ports:
-    #  - "8003:8003"
-    #env_file:
-    #  - .env
-    #depends_on:
-    #  - postgres
-    #networks:
-    #  - app-network
+
 networks:
   app-network:
-    driver: bridge
+    #driver: bridge
+    external: true
 volumes:
   postgres_data:
-
-
-#  database-service:
-#    image: "postgres" # use latest official postgres version
-#    env_file:
-#      - ./database_postgresql/database.env # configurando postgres
-#    volumes:
-#      - ./database_postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql # persistir la informacion
-#      - database-data:/var/lib/postgresql/data/
-#    ports:
-#      - "5432:5432"
-#    networks:
-#      - app-tier
-#    container_name: postgresql_service
-

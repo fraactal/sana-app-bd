@@ -23,3 +23,11 @@ INSERT INTO message_templates (type, content) VALUES
 ('Appointment Reminder', 'Recordatorio: Tiene una cita programada para {fecha} a las {hora}.'),
 ('Welcome Message', 'Bienvenido a nuestro sistema. Nos complace atenderle.')
 ON CONFLICT DO NOTHING;
+
+-- Insertar un administrador
+INSERT INTO users (email, hashed_password, role_id, created_at)
+VALUES 
+('admin@example.com', '$2b$12$CwTycUXWue0Thq9StjUM0uJ2.iQm.w.k4Qku3aF3UVKdKqtAKVPS.', 1, NOW()),
+('receptionist@example.com', '$2b$12$e9z/p9x4bGzRvSDwPpuoieCZyAxsA9Ol.TW9KbZkF54Fyy9g.B0Ge', 2, NOW()),
+('professional@example.com', '$2b$12$8f.X1Zy8.wKhjhvAfpl8xuU7IVftKO.wqJ5ezYyY2cBDwHncmvLCy', 3, NOW())
+ON CONFLICT DO NOTHING;

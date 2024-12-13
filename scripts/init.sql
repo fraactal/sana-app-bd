@@ -45,3 +45,11 @@ CREATE TABLE IF NOT EXISTS message_templates (
     type VARCHAR(50) NOT NULL,
     content TEXT NOT NULL
 );
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    hashed_password VARCHAR(255) NOT NULL,
+    role_id INT REFERENCES roles(id),
+    created_at TIMESTAMP DEFAULT NOW()
+);
